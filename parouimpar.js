@@ -14,34 +14,76 @@ questionamentos:
 
 resultado: PRIMEIRO
 */
-
 function isEven(lista1,lista2){
   var result = lista1 + lista2;
   return(result % 2 ==0)
 }
 
 
-var lista1= [3,4,5,8,9,10];
-var lista2 = [2,2,1,2,2,2];
-let p1= 0; 
-let p2=0;
-
-console.log("seja bem vindo ao jogo de par ou impar");
-
-for (let i = 0;i<lista1.length;i++){
-  if (isEven(lista1[i],lista2[i])){ 
-  p1++;
-  }else {
-    p2 ++;
+function getPlayWinner(lista1,lista2){
+  let p1= 0;
+  let p2=0;
+  for (let i = 0;i<lista1.length;i++){
+      if (isEven(lista1[i],lista2[i])){
+          p1++;
+      }else {
+          p2 ++;
+      }
   }
-} 
 
-if (p1>p2){
-  console.log("o jogador 1 venceu a partida");
-} else if(p1<p2){
-  console.log("o jogador 2 vendeu a partida");
-} else
-{
-  console.log("Empate");
+  if (p1>p2){
+      return "PLAYER_1";
+  } else if(p1<p2){
+      return "PLAYER_2";
+  } else {
+      return "TIE";
+  }
 }
+
+function testEvenPlayerWin() {
+  var lista1= [3,4,5];
+  var lista2 = [2,2,1];
+  if (getPlayWinner(lista1,lista2) != "PLAYER_1") {
+      console.log("Test EvenPlayerWin failed")
+  } else {
+      console.log("OK")
+  }
+}
+
+function testOddPlayerWin() {
+  var lista1= [3,4,5];
+  var lista2 = [2,2,2];
+  if (getPlayWinner(lista1,lista2) != "PLAYER_2") {
+      console.log("Test OddPlayerWin failed")
+  } else {
+      console.log("OK")
+  }
+}
+
+function testTie() {
+  var lista1= [3,4];
+  var lista2 = [2,2];
+  if (getPlayWinner(lista1,lista2) != "TIE") {
+      console.log("Test Tie failed")
+  } else {
+      console.log("OK")
+  }
+}
+
+function testTieWithoutPlaying() {
+  var lista1= [];
+  var lista2 = [];
+  if (getPlayWinner(lista1,lista2) != "TIE") {
+      console.log("Test TieWithoutPlaying failed")
+  } else {
+      console.log("OK")
+  }
+}
+
+testEvenPlayerWin()
+testOddPlayerWin()
+testTie()
+testTieWithoutPlaying()
+
+
 
