@@ -1,14 +1,15 @@
 const readline = require("readline-sync");
 function isOrder(word) {
   let validOrder;
-  for (let i = 0; i < word.length; i++) {   
-    if ( word[i].toLowerCase().charCodeAt() <= validOrder) {
+  for (let i = 0; i < word.length; i++) {  
+    if ( word[i].toLowerCase().charCodeAt() <= validOrder) { 
       return"N";
     } else {
-      validOrder = word[i].charCodeAt();
+      validOrder = word[i].toLowerCase().charCodeAt();
     }
   } return"O"; 
 }
+
 function userInput(number){
   let stokinput=[]; 
   var twoPoints=":"
@@ -17,7 +18,6 @@ function userInput(number){
   }
   console.log(number);
   for(let i = 0; i<number;i++){
-
     console.log(stokinput[i].concat(twoPoints),isOrder(stokinput[i]))
   }
 } 
