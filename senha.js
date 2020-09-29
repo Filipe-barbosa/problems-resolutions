@@ -47,18 +47,16 @@ const getcombination = (password) => {
   for (let i = 0; i < password.length; i++) {
     candidates[i] = discoverCandidatePassword(password[i]);
   }
-  let fixedCandidate = [];
-  let rotativeCandidate = [];
-  fixedCandidate = candidates[0]
-    for (let j = 1; j < candidates.length; j++) {
-      rotativeCandidate = candidates[j];
-      for (let j = 0; j <rotativeCandidate.length; j++) {   
-        fixedCandidate[j]=(
-          [...fixedCandidate[j]].filter((i) => rotativeCandidate[j].has(i))
-        );
-      }
+  const passwordIntersection = candidates[0];
+  for (let index = 1; index < candidates.length; index++) {
+    // como eu usaria o of sendo que eu tenho que iniciar da posição 1 ? por que quando eu itero sobre a variavel ela nao pode ser constante ?
+    for (let j = 0; j < candidates[index].length; j++) { //como eliminar o contador 
+      passwordIntersection[j] = [...passwordIntersection[j]].filter((i) =>
+        candidates[index][j].has(i)
+      );
     }
-  return fixedCandidate;
+  }
+  return passwordIntersection;
 };
 
 const testcase = [
@@ -71,5 +69,5 @@ const testcase2 = [
   [1, 3, 5, 4, 6, 8, 7, 9, 0, 2, "E", "B", "C", "D", "C", "D"],
   [3, 2, 0, 4, 5, 9, 7, 6, 8, 1, "A", "C", "D", "D", "E", "C"],
 ];
-console.log (getcombination(testcase));
-console.log (getcombination(testcase2));
+console.log(getcombination(testcase));
+console.log(getcombination(testcase2));
