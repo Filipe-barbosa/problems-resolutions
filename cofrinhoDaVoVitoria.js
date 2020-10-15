@@ -12,20 +12,16 @@ const testcase = [
   ],
 ];
 
-const calculateDifferenceBetweenSafes = (moneyDeposit) => {
-  for (let i = 0; i < moneyDeposit.length; i++) {
+const calculateDifferenceBetweenSafes = (testCase) => {
+  let indexTest = 1;
+  for (const Deposits of testCase) {
     let joaozinho = 0;
     let zezinho = 0;
-    console.log(`Teste ${i + 1}`);
-    for (let j = 0; j< moneyDeposit[i].length; j++) {
-      for (let k = 0; k < moneyDeposit[i][j].length; k++) {
-        if (k == 0) {
-          joaozinho +=moneyDeposit[i][j][k];
-        } else {
-          zezinho += moneyDeposit[i][j][k];
-        }
-      }
-     console.log(joaozinho - zezinho);
+    console.log(`Teste ${indexTest++}`);
+    for (const Deposit of Deposits) {
+      joaozinho += Deposit[0];
+      zezinho += Deposit[1];
+      console.log(joaozinho - zezinho);
     }
   }
 };
