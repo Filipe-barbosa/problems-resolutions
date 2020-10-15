@@ -26,37 +26,48 @@ se  repita em todos os casos, quando encontramos passamos para a proxima posiç�
 
 */
 
-const testcase = [
-  [1, 7, 3, 9, 0, 8, 5, 6, 2, 4, "B", "C", "E", "A", "E", "B"],
-  [9, 0, 7, 5, 8, 4, 6, 2, 3, 1, "E", "C", "C", "B", "D", "E"],
-];
-
-const discoverCandidatePassword = (configSenha) => {
+const discoverCandidatePassword = (mapPassword) => {
   const mapletters = {
-    A: new Set([configSenha[0], configSenha[1]]),
-    B: new Set([configSenha[2], configSenha[3]]),
-    C: new Set([configSenha[4], configSenha[5]]),
-    D: new Set([configSenha[6], configSenha[7]]),
-    E: new Set([configSenha[8], configSenha[9]]),
+    A: new Set([mapPassword[0], mapPassword[1]]),
+    B: new Set([mapPassword[2], mapPassword[3]]),
+    C: new Set([mapPassword[4], mapPassword[5]]),
+    D: new Set([mapPassword[6], mapPassword[7]]),
+    E: new Set([mapPassword[8], mapPassword[9]]),
   };
   const candidatePassword = [];
   for (let i = 10; i <= 15; i++) {
-    let letter = configSenha[i];
+    let letter = mapPassword[i];
     candidatePassword.push(mapletters[letter]);
   }
   return candidatePassword;
 };
 
-const getcombination = () => {
-  let candidatePassword = discoverCandidatePassword(testcase[0]);
-  let candidatePassword1 = discoverCandidatePassword(testcase[1]);
-  let intersect = new Set();
-  for (let j = 0; j < candidatePassword.length; j++) {
-    intersect.add(
-      [...candidatePassword[j]].filter((i) => candidatePassword1[j].has(i))
-    );
+const getcombination = (password) => {
+  let candidates = [];
+  for (let i = 0; i < password.length; i++) {
+    candidates[i] = discoverCandidatePassword(password[i]);
   }
-  return intersect;
+  const passwordIntersection = candidates[0];
+  for (let index = 1; index < candidates.length; index++) {
+    // como eu usaria o of sendo que eu tenho que iniciar da posição 1 ? por que quando eu itero sobre a variavel ela nao pode ser constante ?
+    for (let j = 0; j < candidates[index].length; j++) { //como eliminar o contador 
+      passwordIntersection[j] = [...passwordIntersection[j]].filter((i) =>
+        candidates[index][j].has(i)
+      );
+    }
+  }
+  return passwordIntersection;
 };
 
-console.log(getcombination());
+const testcase = [
+  [1, 7, 3, 9, 0, 8, 5, 6, 2, 4, "B", "C", "E", "A", "E", "B"],
+  [9, 0, 7, 5, 8, 4, 6, 2, 3, 1, "E", "C", "C", "B", "D", "A"],
+];
+
+const testcase2 = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "B", "C", "D", "D", "E", "E"],
+  [1, 3, 5, 4, 6, 8, 7, 9, 0, 2, "E", "B", "C", "D", "C", "D"],
+  [3, 2, 0, 4, 5, 9, 7, 6, 8, 1, "A", "C", "D", "D", "E", "C"],
+];
+console.log(getcombination(testcase));
+console.log(getcombination(testcase2));
