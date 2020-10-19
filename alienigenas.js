@@ -11,12 +11,12 @@ const testcase =
   ];
 
 
-const indentifyDistintesMdna = (testCase) => {
-    for (const mdna of testCase) {
+const indentifyDistintesMdna = (testCases) => {
+    for (const testcase of testCases) {
       const comparateSpecies = new Set();
-      for (const alienMdna of mdna) {
+      for (const mdna of testcase) {
         let convertesDateSpaciesIntoNumbers = 0;
-        for (const letter of alienMdna) {
+        for (const letter of mdna) {
           convertesDateSpaciesIntoNumbers += letter.charCodeAt();
         }
         comparateSpecies.add(convertesDateSpaciesIntoNumbers);
