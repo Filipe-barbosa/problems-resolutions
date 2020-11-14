@@ -26,4 +26,4 @@ const calculateDifferenceBetweenSafes = (testCase) => {
   }
 };
 
-calculateDifferenceBetweenSafes(testcase);
+indentifyMdna(testcase);
